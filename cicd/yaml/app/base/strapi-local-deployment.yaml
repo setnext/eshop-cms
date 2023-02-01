@@ -44,7 +44,7 @@ spec:
               value: "false"
             - name: DATABASE_USERNAME
               value: strapi
-          image: localhost:5001/eshop-cms-arm64
+          image: localhost:5001/eshop-cms-arm64-small:v9
           imagePullPolicy: Always
           name: eshop-cms
           ports:

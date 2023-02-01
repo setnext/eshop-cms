@@ -1,11 +1,11 @@
-FROM node:16-alpine as BUILD_IMAGE
-#RUN apt-get update && apt-get install libvips-dev -y
-ARG NODE_ENV=production
+FROM node:16 as BUILD_IMAGE
+RUN apt-get update && apt-get install libvips-dev -y
+ARG NODE_ENV=development
 ENV NODE_ENV=${NODE_ENV}
 WORKDIR /opt/
 COPY ./package.json ./
 ENV PATH /opt/node_modules/ .bin:$PATH
-RUN npm install
+RUN npm install --production
 WORKDIR /opt/app
 COPY ./ .
 COPY ./public/uploads/ /public/uploads/
@@ -13,17 +13,15 @@ COPY ./src/api/ /src/api/
 RUN npm run build
 
 # Create new namespace for final Docker Image
-FROM node:16-alpine
-
+FROM node:16
 # Only copy your source code without system file
-COPY --from=BUILD_IMAGE /opt /opt
-
+COPY --from=BUILD_IMAGE /opt/app /strapi
+COPY --from=BUILD_IMAGE /opt/node_modules/ /opt/node_modules/
 ENV PATH /opt/node_modules/ .bin:$PATH
+WORKDIR /strapi
 
-ARG NODE_ENV=production
-ENV NODE_ENV=${NODE_ENV}
-
-WORKDIR /opt/app
+ENV NODE_ENV=production
+ENV STRAPI_LOG_LEVEL=debug
 
 EXPOSE 1337
 

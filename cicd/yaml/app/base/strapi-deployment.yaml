@@ -42,7 +42,7 @@ spec:
               value: "false"
             - name: DATABASE_USERNAME
               value: strapi
-          image: setnext/cms_dev:v3
+          image: setnext/cms_dev:v5
           imagePullPolicy: Always
           name: strapi
           ports:
