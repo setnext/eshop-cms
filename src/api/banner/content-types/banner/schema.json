@@ -4,25 +4,33 @@
   "info": {
     "singularName": "banner",
     "pluralName": "banners",
-    "displayName": "Banner"
+    "displayName": "Banner",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
   },
   "pluginOptions": {},
   "attributes": {
-    "Description": {
+    "description": {
       "type": "richtext"
     },
     "image": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
       "allowedTypes": [
         "images",
         "files",
         "videos",
         "audios"
-      ],
-      "type": "media",
-      "multiple": false
+      ]
+    },
+    "targetUrl": {
+      "type": "string"
+    },
+    "category": {
+      "type": "string"
     }
   }
 }

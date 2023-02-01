@@ -5,5 +5,14 @@ module.exports = ({ env }) => ({
     config: {
       jwtSecret: env('JWT_SECRET') || crypto.randomBytes(16).toString('base64'),
     },
+    upload: {
+      breakpoints: {
+        xlarge: 1920,
+        large: 3456,
+        medium: 750,
+        small: 500,
+        xsmall: 64
+      }
+    }
   },
 });
